@@ -1,20 +1,30 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+
 import { routes } from './app.routes';
-
+import { environment } from '../environments/environment.development';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideHttpClient } from '@angular/common/http';
 
-import { environment } from '../environments/environment';
-import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     importProvidersFrom([
-      NgxAuthFirebaseUIModule.forRoot(environment.firebaseConfig),
+      provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+      provideFirestore(() => getFirestore()),
+      provideAuth(() => getAuth()),
     ]),
+    provideHttpClient(),
     provideAnimationsAsync(),
-    provideAnimationsAsync(),
+    {
+      provide: FIREBASE_OPTIONS,
+      useValue: environment.firebaseConfig,
+    },
   ],
 };
