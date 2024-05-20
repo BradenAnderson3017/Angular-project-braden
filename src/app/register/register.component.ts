@@ -17,9 +17,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Observable, map } from 'rxjs';
 import { merge } from 'rxjs';
-import { MovieService } from '../movie.service';
+import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { RouterLink } from "@angular/router";
+
 
 interface Item {
   name: string;
@@ -37,6 +39,7 @@ interface Item {
     MatIconModule,
     MatButtonModule,
     MatInputModule,
+    RouterLink
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
@@ -49,7 +52,7 @@ export class RegisterComponent {
 
   fb = inject(FormBuilder);
   http = inject(HttpClient);
-  authService = inject (MovieService);
+  authService = inject (AuthService);
   router = inject(Router);
 
   constructor(
@@ -80,7 +83,7 @@ export class RegisterComponent {
     const rawForm = this.form.getRawValue();
     this.authService.register(rawForm.email, rawForm.username, rawForm.password).subscribe({
       next: () => {
-      this.router.navigateByUrl('/movies')
+      this.router.navigateByUrl('/makeup')
     },
       error: (err) => {
         this.errorMessage = err.code;
@@ -90,7 +93,7 @@ export class RegisterComponent {
   signUpWithGoogle() {
     this.authService.googleSignIn().subscribe({
       next: () => {
-        this.router.navigateByUrl('/movies');
+        this.router.navigateByUrl('/makeup');
       },
       error: (err) => {
         this.errorMessage = err.code;

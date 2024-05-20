@@ -1,0 +1,24 @@
+<div class="top-nav-bar-component">
+    @if (this.authService.currentUserSig() === null) {
+        <div class="nav-list-items">
+            <a routerLink="/login">Login</a>
+        </div>
+        <div class="nav-list-items">
+            <a routerLink="/register">Register</a>
+        </div>
+        }
+        @if (this.authService.currentUserSig()) {
+            <div class="nav-list-items">
+                <a routerLink="/makeup" [state]="this.makeup ? this.makeup : null">Search</a>
+            </div>
+            <div class="nav-list-items user">
+                <a routerLink="/{{this.authService.currentUserSig()?.username}}/cart" [state]="this.makeup ? this.makeup : null">
+                    {{this.authService.currentUserSig()?.username}}
+                    <mat-icon>shopping_cart</mat-icon>
+                </a>
+            </div>
+            <div class="nav-list-items">
+                <span (click)="logout()">Logout</span>
+            </div>
+        }
+</div>

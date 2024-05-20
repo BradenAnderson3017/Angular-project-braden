@@ -1,0 +1,38 @@
+<div class="makeup-component">
+  <div class="spinner-container" *ngIf="isLoading">
+    <app-spinner></app-spinner>
+  </div>
+  <div class="makeup-component-container">
+    <div class="makeup-filters-component" *ngIf="makeup">
+      <div class="brands">
+        <Button class="brand-button" #MakeupButton *ngFor="let makeup of makeupBrands" [class.active]="activeFilter === makeup" (click)="filterBrands(makeup, MakeupButton)">
+          {{makeup}}
+        </Button>
+      </div>
+    </div>
+    <div class="makeup-products-container">
+      <div class="makeup" *ngFor="let prod of makeup">
+        <a routerLink="/:{{prod.brand}}/{{prod.name}}/:{{prod.id}}" [state]="(makeup.length === 931) ? makeup : makeupStorage">
+          <div class="makeup-img">
+            <img src='{{prod.api_featured_image}}' alt="makeup-img">
+          </div>
+          <div class="makeup-info">
+            <div class="title">
+              <p>{{prod.brand}}</p>
+            </div>
+            <div class="name">
+              <p>{{prod.name}}</p>
+            </div>
+            <div class="category">
+              <p>Catagory: </p>
+              <p>{{prod.category}}</p>
+            </div>
+          </div>
+          <div class="colors-container">
+            <div class="color" *ngFor="let color of findProductColors(prod.product_colors)" [style.backgroundColor]="color?.hex_value"></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

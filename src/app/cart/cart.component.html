@@ -1,0 +1,32 @@
+<div class="cart-component">
+  <div class="cart-container" *ngIf="(cartItems$ | async) as cartItems">
+    <div class="cart-item" *ngFor="let item of cartItems">
+      <div class="cart-side">
+       
+        <div class="makeup-img">
+            <img src='{{item.makeupItem.api_featured_image}}' alt="makeup-img">
+        </div>
+      
+        <div class="cart-item-bottom">
+          <div class="makeup-description">
+            <p>{{item.makeupItem.description}}</p>
+          </div>
+          <div class="makeup-purchase-info">
+            <div class="name">
+              <p>{{item.makeupItem.brand}}</p>
+                <p>{{ item.makeupItem.name }} ({{ item.quantity }}) - ${{ item.makeupItem.price * item.quantity }}</p>
+            </div>
+        </div>
+        </div>
+        <div class="delete" (click)="onRemoveFromCart(item.id)">
+          <mat-icon>delete</mat-icon>
+        </div>
+      </div>
+    </div>
+    <p>Total: ${{ getTotalPrice() }}</p>
+    <button (click)="onClearCart()">Clear Cart</button>
+  </div>
+</div>
+
+  
+

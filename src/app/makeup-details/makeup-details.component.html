@@ -1,0 +1,50 @@
+<div class="makeup-details-component">
+    <div class="spinner-container" *ngIf="isLoading">
+        <app-spinner></app-spinner>
+    </div>
+    <div class="back-button" *ngIf="!isLoading">
+        <button (click)="goBack()">Go Back</button>
+    </div>
+    <div class="makeup" *ngFor="let prod of makeup">
+        <div class="Brand">
+            <h1>{{brandName}}</h1>
+        </div>
+        <div class="makeup-img">
+            <img src='{{prod.api_featured_image}}' alt="makeup-img">
+        </div>
+        <div class="makeup-purchase-info">
+            <div class="title">
+                <p>Brand: </p>
+                <p>{{prod.brand}}</p>
+            </div>
+            <div class="name">
+                <p>Price: </p>
+                <p>{{(prod.price) | currency}}</p>
+            </div>
+            <div class="category">
+                <p>Rating: </p>
+                <p *ngIf="prod.rating; else rating">{{prod.rating}}/5 Stars</p>
+                <ng-template #rating><p>unrated</p></ng-template>
+            </div>
+            <div class="shop-buttons">
+                <button class="addd-to-cart" (click)="addToCart(prod)">Add To Cart</button>
+                <button class="buy-on-site"><a target="_blank" href="{{prod.website_link}}">Buy On Site</a></button>
+            </div>
+        </div>
+        <div class="colors-container">
+            <div class="single-color-container" *ngFor="let color of prod.product_colors">
+                <p>{{color?.colour_name}}</p>
+                <div class="color" [style.backgroundColor]="color?.hex_value"></div>
+            </div>
+        </div>
+        <div class="makeup-description">
+            <p>Description: {{prod.description}}</p>
+        </div>
+        <div class="makeup-tag-container" *ngIf="prod.tag_list">
+            <p>Tags: </p>
+            <ul class="makeup-tags" *ngFor="let tag of prod.tag_list">
+                <li>{{tag}}</li>
+            </ul>  
+        </div>
+    </div>    
+</div>

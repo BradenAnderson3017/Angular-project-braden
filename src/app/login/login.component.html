@@ -1,50 +1,53 @@
 <div class="login-component">
-    <h1>Login</h1>
+    <div class="login-form-container">
+        <h1>Login</h1>
 
-    @if (errorMessage) {
-        <div class="errorMessage">{{errorMessage}}</div>
-    }
+        @if (errorMessage) {
+            <div class="errorMessage">{{errorMessage}}</div>
+        }
 
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="example-container">
-            <mat-form-field>
-        <mat-label>Enter your email</mat-label>
-        <input 
-            #Email
-            matInput
-            placeholder="example@gmail.com"
-            formControlName="email"
-            (blur)="updateErrorMessage()"
-            required>
-            <button mat-icon-button matSuffix >
-                <mat-icon>mail</mat-icon>
-            </button>
-                @if (email.invalid) {
-            <mat-error>{{errorMessage}}</mat-error>
-        }
-        </mat-form-field>
-        </div>
-        <div class="example-container">
-        <mat-form-field>
-            <mat-label>Enter your password</mat-label>
-            <input 
-                #Password
-                matInput 
-                placeholder="password"
-                [type]="hide ? 'password' : 'text'"
-                formControlName="password"
-                required="">
-           <div class="submit-button">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-           </div>
-        @if (email.invalid) {
-            <mat-error>{{errorMessage}}</mat-error>
-        }
-        </mat-form-field>
-        </div>
-        <button mat-flat-button color="primary" (click)="onSubmit()">Primary</button>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="example-container input">
+                <mat-form-field>
+                    <mat-label>Enter your email</mat-label>
+                    <input 
+                    #Email
+                    matInput
+                    placeholder="example@gmail.com"
+                    formControlName="email"
+                    (blur)="updateErrorMessage()"
+                    required>
+                    <div>
+                        <mat-icon>mail</mat-icon>
+                    </div>
+                    @if (email.invalid) {
+                        <mat-error>{{errorMessage}}</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="example-container input">
+                <mat-form-field>
+                    <mat-label>Enter your password</mat-label>
+                    <input 
+                    #Password
+                    matInput 
+                    placeholder="password"
+                    [type]="hide ? 'password' : 'text'"
+                    formControlName="password"
+                    required="">
+                    <div class="submit-button">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </div>
+                    @if (email.invalid) {
+                        <mat-error>{{errorMessage}}</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="login-button">
+                <button mat-flat-button color="primary" (click)="onSubmit()">Login</button>
+            </div>
         </form>
         <div class="google-sign-in">
             <button class="gsi-material-button" (click)="signInWithGoogle()">
@@ -64,7 +67,8 @@
                 </div>
             </button>
         </div>
-    </div>   
+    </div>
+</div>   
      
   
       

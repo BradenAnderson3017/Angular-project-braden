@@ -11,10 +11,12 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient } from '@angular/common/http';
 
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
+    SpinnerComponent,
     importProvidersFrom([
       provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
       provideFirestore(() => getFirestore()),

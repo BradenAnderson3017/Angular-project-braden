@@ -16,9 +16,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { merge } from 'rxjs';
-import { MovieService } from '../movie.service';
+import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { RouterLink } from "@angular/router";
+
 
 interface Item {
   name: string;
@@ -36,6 +38,7 @@ interface Item {
     MatIconModule,
     MatButtonModule,
     MatInputModule,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
@@ -48,7 +51,7 @@ export class LoginComponent {
 
   fb = inject(FormBuilder);
   http = inject(HttpClient);
-  authService = inject(MovieService);
+  authService = inject(AuthService);
   router = inject(Router);
 
   constructor(private firestore: Firestore) {
@@ -76,7 +79,7 @@ export class LoginComponent {
     const rawForm = this.form.getRawValue();
     this.authService.login(rawForm.email, rawForm.password).subscribe({
       next: () => {
-        this.router.navigateByUrl('/movies');
+        this.router.navigateByUrl('/makeup');
       },
       error: (err) => {
         this.errorMessage = err.code;
@@ -87,7 +90,7 @@ export class LoginComponent {
   signInWithGoogle() {
     this.authService.googleSignIn().subscribe({
       next: () => {
-        this.router.navigateByUrl('/movies');
+        this.router.navigateByUrl('/makeup');
       },
       error: (err) => {
         this.errorMessage = err.code;
