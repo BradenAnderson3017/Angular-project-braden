@@ -1,8 +1,5 @@
 import "./chunk-NHJI2GWC.js";
 import {
-  isPlatformServer
-} from "./chunk-ZBEV6SKF.js";
-import {
   FIREBASE_APP_NAME,
   FIREBASE_OPTIONS,
   ɵapplyMixins,
@@ -13,6 +10,9 @@ import {
 import {
   firebase
 } from "./chunk-PQUMMHAN.js";
+import {
+  isPlatformServer
+} from "./chunk-ZBEV6SKF.js";
 import "./chunk-O54ZNHWQ.js";
 import {
   FirebaseApp
@@ -56,10 +56,10 @@ import {
   ɵɵdefineNgModule,
   ɵɵinject
 } from "./chunk-CIZR6OUE.js";
-import "./chunk-MJV6UDH2.js";
 import {
   merge
 } from "./chunk-OI5GLHID.js";
+import "./chunk-MJV6UDH2.js";
 import {
   Observable,
   Subject,

@@ -31,3 +31,12 @@
 .user:hover {
     width: auto;
 }
+
+
+/* :host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  } */
+  
+  

@@ -4555,7 +4555,10 @@ export {
   coerceNumberProperty,
   coerceElement,
   ObserversModule,
+  AriaDescriber,
+  InteractivityChecker,
   FocusMonitor,
+  A11yModule,
   Directionality,
   MatCommonModule,
   _ErrorStateTracker,
@@ -4563,4 +4566,4 @@ export {
   MatRippleModule,
   MatRippleLoader
 };
-//# sourceMappingURL=chunk-YPL4P4JH.js.map
+//# sourceMappingURL=chunk-D6K5QMJ3.js.map

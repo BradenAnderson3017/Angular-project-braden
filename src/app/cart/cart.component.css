@@ -1,98 +1,158 @@
 .cart-component {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    width: 90%;
-    height: 100%;
-   
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 90%;
+  height: 100%;
 }
 .cart-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    width: 100%;
-    height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 90%;
 }
 .cart-item {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 20px 0;
-    border-radius: 5px;
-    border: solid 1px rgb(205, 121, 135);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px 0;
+  border-radius: 5px;
+  border: solid 1px rgb(205, 121, 135);
 }
 .cart-side {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    height: 100%;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
 }
 .cart-item-top {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
 .cart-item-bottom {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 55%;
 }
 .Brand {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 70%;
-  }
-  .Brand h1 {
-    font-size: 20px;
-    padding: 0;
-    margin: 0;
-  }
-  .title,
-  .name {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 17px;
-  }
-  .makeup-img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    background-color: rgb(255, 255, 255);
-    object-fit: cover;
-  }
-  .makeup-img img {
-    
-    width: 75%;
-    height: 75%;
-  }
-  .makeup-description {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-    align-items: center;
-    width: 100%;
-  }
-  .makeup-purchase-info {
-    display: flex;
-    justify-content: start;
-    width: 100%;
-  }
-  
-  p {
-    margin: 0;
-    padding: 0;
-  }
-  .delete {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+}
+.Brand h1 {
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+}
+.title,
+.name {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 17px;
+}
+.quantity {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: start;
+  width: 100%;
+  gap: 5px;
+}
+.add,
+.remove {
+    text-align: start;
+    background-color: rgb(205, 121, 135);
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    width: 40%;
+}
+.add:hover,
+.remove:hover {
+  background-color: rgb(240, 161, 174);
+}
+.makeup-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+}
+.makeup-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  object-fit: cover;
+}
+.makeup-img img {
+  width: 75%;
+  height: 75%;
+}
+.makeup-description {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+}
+.makeup-purchase-info {
+  display: flex;
+  justify-content: start;
+  width: 100%;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+.delete {
+  display: flex;
+  justify-content: end;
+  align-items: start;
+  color: rgb(205, 121, 135);
+}
+.delete mat-icon:hover {
+  color: rgb(246, 129, 199);
+}
+.total_clear-cart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 20px;
+  background-color: rgb(252, 217, 255);
+  position: fixed;
+  bottom: 0;
+  gap: 10px;
+}
+.total_clear-cart p {
+  display: flex;
+  justify-self: center;
+  align-self: center;
+}
+.total_clear-cart button {
+  background-color: rgb(205, 121, 135);
+  border: none;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+.clear-cart-text {
+  margin-left: 20px;
+}
+.clear-cart-button {
+  margin-right: 20px;
+}

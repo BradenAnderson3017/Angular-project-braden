@@ -1,12 +1,12 @@
 <div class="cart-component">
   <div class="cart-container" *ngIf="(cartItems$ | async) as cartItems">
-    <div class="cart-item" *ngFor="let item of cartItems">
+    <div class="cart-item item{{item.id}}" *ngFor="let item of cartItems" >
       <div class="cart-side">
-       
-        <div class="makeup-img">
-            <img src='{{item.makeupItem.api_featured_image}}' alt="makeup-img">
+        <div class="makeup-img-container">
+          <div class="makeup-img">
+              <img src='{{item.makeupItem.api_featured_image}}' alt="makeup-img">
+          </div>
         </div>
-      
         <div class="cart-item-bottom">
           <div class="makeup-description">
             <p>{{item.makeupItem.description}}</p>
@@ -15,16 +15,26 @@
             <div class="name">
               <p>{{item.makeupItem.brand}}</p>
                 <p>{{ item.makeupItem.name }} ({{ item.quantity }}) - ${{ item.makeupItem.price * item.quantity }}</p>
-            </div>
+          </div>
         </div>
+          <div class="quantity">
+            <button class="add" #add (click)="quantity(add.innerHTML, item.id)">Add to Quantity</button>
+            <button class="remove" #remove (click)="quantity(remove.innerHTML, item.id)">Remove from Quantity</button>
+          </div>
         </div>
         <div class="delete" (click)="onRemoveFromCart(item.id)">
           <mat-icon>delete</mat-icon>
         </div>
       </div>
     </div>
-    <p>Total: ${{ getTotalPrice() }}</p>
-    <button (click)="onClearCart()">Clear Cart</button>
+  </div>
+  <div class="total_clear-cart">
+    <div class="clear-cart-text">
+      <p>Total: ${{ getTotalPrice() }}</p>
+    </div>
+    <div class="clear-cart-button">
+      <button (click)="onClearCart()">Clear Cart</button>
+    </div>
   </div>
 </div>
 

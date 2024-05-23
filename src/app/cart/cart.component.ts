@@ -25,12 +25,18 @@ import { Router } from "@angular/router";
 export class CartComponent implements OnInit {
   cartItems$ = this.cartService.cartItems$;
   router = inject(Router);
+  authService = inject(AuthService);
   makeup: any;
 
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
    this.makeup = this.router.lastSuccessfulNavigation?.extras.state
+   if (this.authService.currentUserSig()) {
+    this.cartService.cartItems$.subscribe((item: any) => {
+      console.log(item)
+    })
+   }
   }
 
   onAddToCart(item: any) {
@@ -47,5 +53,34 @@ export class CartComponent implements OnInit {
 
   getTotalPrice() {
     return this.cartService.getTotalPrice();
+  }
+  quantity(value: any, itemId: any) {
+    const cartItem = document.querySelector(`.item${itemId}`);
+    console.log(cartItem)
+
+    if (value == 'Add to Quantity') {
+      this.cartService.cartItems$.subscribe((items: any) => {
+        const item = items.find((obj: any) => obj.id === itemId);
+        if (item) {
+          console.log(item);
+          item.quantity = item.quantity + 1;
+        }
+      });
+    
+    } else {
+      this.cartService.cartItems$.subscribe((items: any) => {
+        const item = items.find((obj: any) => obj.id === itemId);
+        if (item) {
+          if (item.quantity == 1) {
+            console.log(item);
+            this.onRemoveFromCart(item.id)
+          } else {
+            console.log(item);
+          item.quantity = item.quantity - 1;
+          }
+        }
+      });
+    }
+  
   }
 }

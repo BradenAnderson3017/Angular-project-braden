@@ -18,8 +18,13 @@
   position: absolute;
 }
 .makeup-component-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
   width: 90%;
   height: 100%;
+  margin: 20px 0px;
 }
 .makeup-filters-component {
   display: flex;
@@ -29,19 +34,20 @@
 }
 .brands {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
   align-items: start;
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
+  gap: 5px;
 }
 .brand-button {
   display: flex;
-  width: auto;
-  padding: 10px;
+  padding: 5px;
+  width: 20%;
   color: white;
   background-color: rgb(205, 121, 135);
-  border-radius: 35px;
+  border-radius: 5px;
   font-size: 15px;
   border: none;
 }

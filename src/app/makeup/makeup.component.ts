@@ -100,6 +100,7 @@ export class MakeUpComponent {
 
   ngOnInit() {
     const navigation = this.router.lastSuccessfulNavigation?.extras.state;
+    console.log(navigation);
     if (!this.makeup) {
       if ( navigation && typeof navigation !== 'object') {
         this.makeup = navigation

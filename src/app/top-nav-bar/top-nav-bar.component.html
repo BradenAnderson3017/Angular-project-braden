@@ -8,15 +8,28 @@
         </div>
         }
         @if (this.authService.currentUserSig()) {
-            <div class="nav-list-items">
-                <a routerLink="/makeup" [state]="this.makeup ? this.makeup : null">Search</a>
+            <div class="nav-list-items" *ngIf="this.makeup; else NoMakeup">
+                <a routerLink="/makeup" [state]="this.makeup.length > 0 ? this.makeup :  null">Search</a>
             </div>
-            <div class="nav-list-items user">
-                <a routerLink="/{{this.authService.currentUserSig()?.username}}/cart" [state]="this.makeup ? this.makeup : null">
-                    {{this.authService.currentUserSig()?.username}}
-                    <mat-icon>shopping_cart</mat-icon>
+            <ng-template #NoMakeup>
+                <div class="nav-list-items">
+                    <a routerLink="/makeup">Search</a>
+                </div>
+            </ng-template>
+            <div class="nav-list-items user" *ngIf="makeupBadge.length > 0; else noBadge">
+                <a routerLink="/{{authService.currentUserSig()?.username}}/cart" [state]="this.makeup ? this.makeup : null">
+                  {{authService.currentUserSig()?.username}}
+                  <mat-icon aria-hidden="false" [matBadge]="findBadgeNumber()" matBadgeColor="primary">shopping_cart</mat-icon>
                 </a>
-            </div>
+              </div>
+              <ng-template #noBadge>
+                <div class="nav-list-items user">
+                  <a routerLink="/{{authService.currentUserSig()?.username}}/cart" [state]="this.makeup ? this.makeup : null">
+                    {{authService.currentUserSig()?.username}}
+                    <mat-icon>shopping_cart</mat-icon>
+                  </a>
+                </div>
+              </ng-template>
             <div class="nav-list-items">
                 <span (click)="logout()">Logout</span>
             </div>

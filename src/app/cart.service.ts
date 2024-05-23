@@ -10,7 +10,9 @@ import {
   setDoc,
   updateDoc,
   deleteDoc,
+  getDocs,
 } from "@angular/fire/firestore";
+
 import { AuthService } from "./auth.service";
 
 interface CartItem {
@@ -56,34 +58,39 @@ export class CartService {
       });
   }
 
-  addToCart(makeupItem: any, quantity: number = 1) {
+  async addToCart(makeupItem: any, quantity: number = 1) {
     const cartItem = { makeupItem, quantity };
     const itemId = makeupItem.id;
     const itemRef = doc(this.firestore, `users/${this.userId}/cart/${itemId}`);
-    getDoc(itemRef).then((docSnapshot: any) => {
-      if (docSnapshot.exists()) {
-        const existingItem = docSnapshot.data() as CartItem;
-        updateDoc(itemRef, { quantity: existingItem.quantity + quantity });
-      } else {
-        setDoc(itemRef, cartItem);
-      }
-    });
+    const docSnapshot = await getDoc(itemRef);
+
+    if (docSnapshot.exists()) {
+      const existingItem = docSnapshot.data() as CartItem;
+      await updateDoc(itemRef, { quantity: existingItem.quantity + quantity });
+    } else {
+      await setDoc(itemRef, cartItem);
+    }
+
+    this.fetchCartItems(); // Fetch cart items after adding
   }
 
-  removeFromCart(itemId: string) {
+  async removeFromCart(itemId: string) {
     const itemRef = doc(this.firestore, `users/${this.userId}/cart/${itemId}`);
-    deleteDoc(itemRef);
+    await deleteDoc(itemRef);
+    this.fetchCartItems(); // Fetch cart items after removing
   }
 
-  clearCart() {
-    const collectionRef = collection(this.firestore, `users/${this.userId}/cart/`);
-    collectionData(collectionRef) 
-    .subscribe((documents) => {
-      documents.forEach((document: any) => {
-        const itemRef = doc(this.firestore, `users/${this.userId}/cart/${document.makeupItem.id}`)
-        deleteDoc(itemRef);
-      })
-    })
+  async clearCart() {
+    const collectionRef = collection(this.firestore, `users/${this.userId}/cart`);
+    const querySnapshot = await getDocs(collectionRef);
+  
+    const deletePromises: Promise<void>[] = [];
+    querySnapshot.forEach((doc: any) => {
+      deletePromises.push(deleteDoc(doc.ref));
+    });
+  
+    await Promise.all(deletePromises);
+    this.cartItemsSubject.next([]); // Clear the cart items subject
   }
 
   getCartItems() {
